@@ -1,4 +1,4 @@
-package com.rnkotlinnativemodule
+package com.rnkotlinnativemodule.BasicView
 
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext

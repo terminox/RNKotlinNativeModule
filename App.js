@@ -20,7 +20,7 @@ import {
 
 const NativeView = Platform.select({
   ios: View,
-  android: requireNativeComponent('RNBasicView')
+  android: requireNativeComponent('RNLineChartView')
 })
 
 const App: () => React$Node = () => {
