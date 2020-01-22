@@ -6,8 +6,8 @@ import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ReactShadowNode
 import com.facebook.react.uimanager.ViewManager
-import com.rnkotlinnativemodule.BasicView.RNBasicView
-import com.rnkotlinnativemodule.LineChart.RNLineChartView
+import com.rnkotlinnativemodule.basicview.RNBasicView
+import com.rnkotlinnativemodule.linechartview.RNLineChartView
 
 class RNNativeModulePackage: ReactPackage {
     override fun createNativeModules(reactContext: ReactApplicationContext): MutableList<NativeModule> {

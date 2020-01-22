@@ -1,4 +1,4 @@
-package com.rnkotlinnativemodule.BasicView
+package com.rnkotlinnativemodule.basicview
 
 import android.content.Context
 import android.view.LayoutInflater
