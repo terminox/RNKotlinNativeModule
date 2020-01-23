@@ -2,12 +2,16 @@ package com.rnkotlinnativemodule.linechartview
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.DashPathEffect
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.utils.ColorTemplate
 import com.rnkotlinnativemodule.R
 import kotlinx.android.synthetic.main.line_chart_view.view.*
 import kotlin.properties.Delegates
@@ -19,35 +23,44 @@ class LineChartView(context: Context): LinearLayout(context) {
     var data: LineData? = null
         set(value) {
             lineChartView.data = value
+            lineChartView.invalidate()
         }
 
     init {
+        // Inflate layout
         LayoutInflater.from(context).inflate(R.layout.line_chart_view, this, true)
 
-        val revenueComp1 = arrayListOf(10000f, 20000f, 30000f, 40000f)
-        val revenueComp2 = arrayListOf(12000f, 23000f, 35000f, 48000f)
+        // Style chart
+        lineChartView.description = null
+        lineChartView.axisRight.isEnabled = false
+        lineChartView.legend.isEnabled = false
+        lineChartView.isDoubleTapToZoomEnabled = false
+        lineChartView.isScaleXEnabled = false
+        lineChartView.isScaleYEnabled = false
+        lineChartView.minOffset = 0f
+        lineChartView.isHighlightPerTapEnabled = false
+        lineChartView.isHighlightPerDragEnabled = false
+        lineChartView.isDragYEnabled = false
+        lineChartView.marker = null
 
-        val entries1 = revenueComp1.mapIndexed { index, revenue ->
-            Entry(index.toFloat(), revenue)
-        }
+        val extraTopOffset = 16.0f
+        val markerHeight = 28.0f
+        lineChartView.extraTopOffset = extraTopOffset + markerHeight
 
-        val entries2 = revenueComp2.mapIndexed { index, revenue ->
-            Entry(index.toFloat(), revenue)
-        }
+        val xAxis = lineChartView.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.textColor = ColorTemplate.rgb("#8DA2B9")
+        xAxis.textSize = 10f
+        xAxis.setDrawLabels(false)
+        xAxis.setDrawAxisLine(false)
+        xAxis.setDrawGridLines(false)
 
-        val lineDataSet1 = LineDataSet(entries1, "Company 1")
-        lineDataSet1.color = Color.RED
-        lineDataSet1.setDrawValues(false)
-        lineDataSet1.axisDependency = YAxis.AxisDependency.LEFT
-
-        val lineDataSet2 = LineDataSet(entries2, "Company 2")
-        lineDataSet2.color = Color.BLUE
-        lineDataSet1.setDrawValues(false)
-        lineDataSet1.axisDependency = YAxis.AxisDependency.LEFT
-
-        val lineDataSets = arrayListOf(lineDataSet1, lineDataSet2) as List<LineDataSet>
-        val lineData = LineData(lineDataSets)
-//        lineChartView.data = lineData
-        lineChartView.invalidate()
+        val leftAxis = lineChartView.axisLeft
+        leftAxis.gridColor = ColorTemplate.rgb("#D4DCE6")
+        leftAxis.textColor = ColorTemplate.rgb("#8DA2B9")
+        leftAxis.textSize = 10f
+        leftAxis.setGridDashedLine(DashPathEffect(floatArrayOf(5f, 5f), 5f))
+        leftAxis.setDrawAxisLine(false)
+        leftAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART)
     }
 }
