@@ -10,8 +10,17 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.rnkotlinnativemodule.R
 import kotlinx.android.synthetic.main.line_chart_view.view.*
+import kotlin.properties.Delegates
 
 class LineChartView(context: Context): LinearLayout(context) {
+
+    var coords: ArrayList<HashMap<String, Float>> = arrayListOf()
+
+    var data: LineData? = null
+        set(value) {
+            lineChartView.data = value
+        }
+
     init {
         LayoutInflater.from(context).inflate(R.layout.line_chart_view, this, true)
 
@@ -38,7 +47,7 @@ class LineChartView(context: Context): LinearLayout(context) {
 
         val lineDataSets = arrayListOf(lineDataSet1, lineDataSet2) as List<LineDataSet>
         val lineData = LineData(lineDataSets)
-        lineChartView.data = lineData
+//        lineChartView.data = lineData
         lineChartView.invalidate()
     }
 }
